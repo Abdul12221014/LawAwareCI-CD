@@ -1,1 +1,1 @@
-export const base_url = "https://law-aware.onrender.com"; 
+export const base_url = "https://law-aware-backend.onrender.com"; 
