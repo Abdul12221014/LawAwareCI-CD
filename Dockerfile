@@ -9,4 +9,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 5000
-CMD ["node", "server.js"]  # Adjust if your entry point is different
+CMD ["node", "index.js"]  # Adjust if your entry point is different
