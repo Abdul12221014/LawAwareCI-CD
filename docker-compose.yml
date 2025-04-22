@@ -1,0 +1,44 @@
+version: '3'
+services:
+  backend:
+    build: .
+    container_name: lawaware-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/lawaware
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: lawaware-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo
+    container_name: lawaware-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+
+  nginx:
+    image: nginx
+    container_name: lawaware-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  mongo-data:
