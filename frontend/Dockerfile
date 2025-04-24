@@ -1,14 +1,17 @@
-# Frontend Dockerfile for React
-FROM node:18
+# Frontend Dockerfile
+FROM node:18 AS build
 
 WORKDIR /app
 
-COPY frontend/package*.json ./
+COPY package*.json ./
 RUN npm install
 
-COPY frontend/ .
-
+COPY . .
 RUN npm run build
 
-EXPOSE 3000
-CMD ["npx", "serve", "-s", "build", "-l", "3000"]
+# Serve with nginx
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
