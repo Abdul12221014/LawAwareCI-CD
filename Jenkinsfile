@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // Jenkins Credential ID
+        DOCKERHUB_USERNAME = 'rusteecode97' // your DockerHub username
     }
 
     stages {
@@ -16,7 +17,7 @@ pipeline {
             steps {
                 dir('.') {
                     script {
-                        docker.build("law-backend", "-f Dockerfile .")
+                        docker.build("${DOCKERHUB_USERNAME}/law-backend", "-f Dockerfile .")
                     }
                 }
             }
@@ -26,7 +27,7 @@ pipeline {
             steps {
                 dir('frontend') {
                     script {
-                        docker.build("law-frontend", "-f Dockerfile .")
+                        docker.build("${DOCKERHUB_USERNAME}/law-frontend", "-f Dockerfile .")
                     }
                 }
             }
@@ -42,8 +43,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-creds') {
-                        docker.image('law-backend').push('latest')
-                        docker.image('law-frontend').push('latest')
+                        docker.image("${DOCKERHUB_USERNAME}/law-backend").push('latest')
+                        docker.image("${DOCKERHUB_USERNAME}/law-frontend").push('latest')
                     }
                 }
             }
