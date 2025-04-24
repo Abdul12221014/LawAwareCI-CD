@@ -7,11 +7,12 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            steps {
-                echo '🔄 Cloning repository...'
-                git 'https://github.com/abhishek12221732/law-aware-cicd.git'
-            }
-        }
+    steps {
+        echo '🔄 Cloning repository...'
+        git branch: 'main', url: 'https://github.com/abhishek12221732/law-aware-cicd.git'
+    }
+}
+
 
         stage('Build & Run Containers') {
             steps {
