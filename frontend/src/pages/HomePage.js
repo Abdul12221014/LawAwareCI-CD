@@ -107,7 +107,7 @@ const HomePage = () => {
                 className="inline-block px-[2vw] py-[1vw] rounded-lg font-semibold bg-[#69b578] text-[#ffffff] hover:bg-[#03254e] w-3/4"
               >
                 <div className="text-center text-2xl poppins-light">
-                  Get Started Now
+                  Get Started ➡️
                 </div>
               </Link>
             </div>
