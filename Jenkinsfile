@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'docker/compose:1.29.2' // or any image with docker + docker-compose
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     environment {
         DOCKER_IMAGE = 'lawaware-app'
@@ -7,11 +12,12 @@ pipeline {
 
     stages {
         stage('Checkout') {
-    steps {
-        echo '🔄 Cloning repository...'
-        git branch: 'main', url: 'https://github.com/abhishek12221732/law-aware-cicd.git'
-    }
-}
+            steps {
+                echo '🔄 Cloning repository...'
+                git branch: 'main', url: 'https://github.com/abhishek12221732/law-aware-cicd.git'
+            }
+        }
+
 
 
         stage('Build & Run Containers') {
