@@ -9,7 +9,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URI = mongodb+srv://arshadnoor585:Q5nO6NMHjCrYq4Uh@cluster0.a9zdj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - MONGO_URI=mongodb+srv://arshadnoor585:Q5nO6NMHjCrYq4Uh@cluster0.a9zdj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
   frontend:
     build: ./frontend
@@ -23,5 +23,17 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  jenkins:
+    image: jenkins/jenkins:lts
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true  # Allows Docker inside Docker (DinD)
+
 volumes:
   mongo-data:
+  jenkins_home:
