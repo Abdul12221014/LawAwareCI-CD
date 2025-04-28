@@ -3,13 +3,13 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // Jenkins Credential ID
-        DOCKERHUB_USERNAME = 'rusteecode97' // your DockerHub username
+        DOCKERHUB_USERNAME = 'abdul12221014' // your DockerHub username
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/abhishek12221732/law-aware-cicd'
+                git branch: 'main', url: 'https://github.com/Abdul12221014/LawAwareCI-CD'
             }
         }
 
